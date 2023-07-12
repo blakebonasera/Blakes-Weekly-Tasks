@@ -10,6 +10,9 @@
             color: #FBFBFF;
             align-items: center;
         }
+        a{
+                color:black;
+            }
     </style>
 </head>
 <body>
@@ -17,12 +20,11 @@
         <h1 style="text-align: center;">Edit Task</h1>
     </div>
     <div class="container">
-
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input class="btn btn-success" type="submit" value="Update"/>
-            <button><a href="{% url 'main:task_list' %}">List</a></button>
+            <button type="button" class="btn btn-primary"><a href="{% url 'main:task_list' %}">Back to list of tasks</a></button>
         </form>
     </div>
 </body>

@@ -14,12 +14,13 @@
             a{
                 color:black;
             }
+            
         </style>
 </head>
 <body>
     <div class="jumbotron">
     <h1 style="text-align: center;">Task Calendar</h1>
-    <h2 style="text-align: center; padding-bottom: 5px;">Keeping Blake on task.</h2>
+    <h4 style="text-align: center; padding-bottom: 5px;">Keeping Blake on task.</h4>
     </div>
     <div class="container">
     <button type="button" class="btn btn-primary" ><a href="{% url 'main:task_create' %}">Create New Task</a></button>
@@ -31,17 +32,19 @@
                     <th>Day of Week</th>
                     <th>Task</th>
                     <th>Description</th>
+                    <th>Progress</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
+            {% for task in tasks %}
             <tbody>
                 <tr>
-                    {% for task in tasks %}
                     <th scope="row"><strong>{{task.urgency}}</strong></th>
                     <th ><strong>{{task.day}}</strong></th>
                     <th >{{task.title}}</th>
                     <th>{{task.description}}</th>
+                    <th>{{task.progress}}</th>
                     <th><button type="button" class="btn btn-warning" ><a href="{% url 'main:task_update' pk=task.pk %}">Edit</a></button></th>
                     <th><button type="button" class="btn btn-danger" ><a href="{% url 'main:task_delete' pk=task.pk %}">Delete</a></button></th>
                     
