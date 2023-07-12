@@ -11,32 +11,47 @@
                 color: #FBFBFF;
                 align-items: center;
             }
-            img{
-                height: 100px;
-                width: 100px;
-            }
             a{
-                color: #0B4F6C;
+                color:black;
             }
         </style>
 </head>
 <body>
     <div class="jumbotron">
     <h1 style="text-align: center;">Task Calendar</h1>
-    <h2 style="text-align: center;">Keeping Blake on task.</h2>
+    <h2 style="text-align: center; padding-bottom: 5px;">Keeping Blake on task.</h2>
     </div>
     <div class="container">
-    <button><a href="{% url 'main:task_create' %}">Create New Task</a></button>
+    <button type="button" class="btn btn-primary" ><a href="{% url 'main:task_create' %}">Create New Task</a></button>
     <ul>
-        {% for task in tasks %}
-            <li>
-                <strong>{{ task.day }}:</strong> {{ task.title }} <strong> {{task.urgency}}</strong>
-                <button><a href="{% url 'main:task_update' pk=task.pk %}">Edit</a></button>
-                <button><a href="{% url 'main:task_delete' pk=task.pk %}">Delete</a></button>
-            </li>
-        {% empty %}
-            <li>No tasks found.</li>
-        {% endfor %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Urgency</th>
+                    <th>Day of Week</th>
+                    <th>Task</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for task in tasks %}
+                    <th scope="row"><strong>{{task.urgency}}</strong></th>
+                    <th ><strong>{{task.day}}</strong></th>
+                    <th >{{task.title}}</th>
+                    <th>{{task.description}}</th>
+                    <th><button type="button" class="btn btn-warning" ><a href="{% url 'main:task_update' pk=task.pk %}">Edit</a></button></th>
+                    <th><button type="button" class="btn btn-danger" ><a href="{% url 'main:task_delete' pk=task.pk %}">Delete</a></button></th>
+                    
+                    {% empty %}
+                    <th><strong>No tasks found.</strong></th>
+                    {% endfor %}
+                    
+                </tr>
+            </tbody>
+        </table>
     </ul>
 </div>
     
